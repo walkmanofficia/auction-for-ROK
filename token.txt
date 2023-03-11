@@ -1,0 +1,35 @@
+MTA3Njg4MTA0MzkzNzg0MTE4NA.GXRoR1.Tsw1us1q0W-P9dHxOvl0kyQk1HpPuWuISRLBPE
+
+min = min + step
+				const jk = new EmbedBuilder()
+					.setColor('Random')
+					.setTitle(`Лот аукциона: ${dfs}`)
+					.setDescription(`
+					Создатель: ${interaction.user.username}
+					Длительность: ${durations}
+					Ставка на данный момент: ${min}
+					Максимальная ставка: ${max}
+					Шаг: ${step} 
+					Число победителей: ${winners}`)
+					i.editReply({embeds: jk, components: row})
+
+
+					else if (commandName === 'channel') {
+		const chan = interaction.guild.channels.create({
+			name: 'test',
+			type: ChannelType.GuildText,
+			permissionOverwrites: [
+				{
+					id: interaction.guild.roles.everyone,
+					deny: [PermissionsBitField.Flags.SendMessages],
+				},
+				{
+					id: interaction.guild.id,
+					allow: [PermissionsBitField.Flags.ViewChannel],
+				},
+			],
+		});
+	const guild = interaction.guild
+	const channell = guild.channels.array().filter(c => c.name === 'test')
+	interaction.reply(channell.id)
+	}
