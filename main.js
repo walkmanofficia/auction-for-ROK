@@ -159,9 +159,9 @@ client.on(Events.InteractionCreate, async interaction => {
 		var durations = interaction.options.getString('durations')
 		const times = interaction.options.getNumber('time')
 		const dfs = interaction.options.getString('lot')
-		let time = times-3
+		let time = times
 		let lc = interaction.user
-		const guild = interaction.guild	
+		const guild = interaction.guild
 		interaction.reply({content: `аукцион будет запущен в ${time-3} utc`, ephemeral: true})
 		if(max<min) {
 			interaction.reply({content: 'максимальная сумма не может быть меньше или равна минимальной', ephemeral: true})
@@ -186,16 +186,16 @@ client.on(Events.InteractionCreate, async interaction => {
 		const row = new ActionRowBuilder()
 		.addComponents(
 			new ButtonBuilder()
-				.setCustomId('primary')
+				.setCustomId('staa')
 				.setLabel('Click me!')
 				.setStyle(ButtonStyle.Success),
 		);
 		let fk = 0
 		channel.send({embeds: [j], components: [row]} ).then(msg => {
-		const collector = channel.createMessageComponentCollector()
+			const collector = channel.createMessageComponentCollector()
 		collector.on('collect', async i => {
-			if (i.customId === 'primary') {
-if(fk === client.users.cache.get(i.user.id).id) return
+			if (i.customId === 'staa') {
+if(fk === client.users.cache.get(i.user.id).id) return 
 if(min >= max-step) {durations = '1s'}
 					if(getBalance(i.user.id)<min+step) return
 				min = min + step
@@ -242,7 +242,7 @@ if(min >= max-step) {durations = '1s'}
 				setTimeout(() => end(), ms(durations))
 			}
 			})
-		  }); 
+		  });  
 		})
 		tt.start()
 	}
@@ -255,7 +255,7 @@ if(min >= max-step) {durations = '1s'}
 		const times = interaction.options.getNumber('time')
 		const dfs = interaction.options.getString('lot')
 		let lc = interaction.user
-		let time = times-3
+		let time = times
 		if(max<min) {
 			interaction.reply({content: 'максимальная сумма не может быть меньше или равна минимальной', ephemeral: true})
 			return
@@ -265,7 +265,7 @@ if(min >= max-step) {durations = '1s'}
 			return
 		}
 		interaction.reply({content: `аукцион будет запущен в ${time-3} utc`, ephemeral: true})
-		let tt = new CronJob(`00 00 ${time} * * *`, () => {
+		let tt = new CronJob(`00 13 ${time} * * *`, () => {
 		guild.channels.create({
 			name: 'Лот: ' + dfs 
 		}).then(result => {
@@ -292,10 +292,13 @@ if(min >= max-step) {durations = '1s'}
 		const collector = channel.createMessageComponentCollector()
 		collector.on('collect', async i => {
 			if (i.customId === 'primar') {
+
+				if(getstawka(i.user.id) > 0) return 
 if(fk === client.users.cache.get(i.user.id).id) return
 if(min >= max-step) {durations = '1s'}
 					if(getBalance(i.user.id)<min+step) return
 				min = min + step
+				
 				addStawk(i.user.id, min)
 				fk=i.user.id
 				const jk = new EmbedBuilder()

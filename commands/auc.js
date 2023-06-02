@@ -35,7 +35,7 @@ module.exports = {
 							.addNumberOption(option =>
 								option
 								.setName('time')
-								.setDescription('начало аукциона по utc')
+								.setDescription('начало аукциона по мск')
 								.setRequired(true)
 								),
 	async execute(interaction) {
